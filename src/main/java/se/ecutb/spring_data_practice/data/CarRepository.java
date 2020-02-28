@@ -18,7 +18,7 @@ public interface CarRepository extends CrudRepository<Car, Integer> {
 
     //Hitta alla bilar som har en viss status kod.
     List<Car> findByStatusCodesStatusCodeIgnoreCase(String statusCode);
-    @Query("SELECT car FROM Car car LEFT JOIN car.statusCodes status WHERE UPPER(status.statusCode) = UPPER(:statusCode)")
+    @Query("SELECT car FROM Car car JOIN FETCH car.statusCodes status WHERE UPPER(status.statusCode) = UPPER(:statusCode)")
     List<Car> findByStatusCodesStatusCodeIgnoreCaseWithQuery(@Param("statusCode") String statusCode);
 
     //Hitta alla bilar äldre än ett visst datum.
